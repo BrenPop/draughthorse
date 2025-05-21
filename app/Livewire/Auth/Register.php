@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\UserType;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -10,7 +11,9 @@ class Register extends Component
 {
     public function registerUser()
     {
-        return redirect()->route('register.user');
+        $patronUserType = UserType::where('slug', 'patron')->first();
+        
+        return redirect()->route('register.user', ['userTypeId' => $patronUserType->id]);
     }
 
     public function registerBar()

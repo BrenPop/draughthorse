@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)->name('login');
     Route::get('register', Register::class)->name('register');
-    Route::get('/register/user', RegisterUser::class)->name('register.user');
+    Route::get('/register/user/{userTypeId}', RegisterUser::class)->name('register.user');
     Route::get('/register/bar',RegisterBar::class)->name('register.bar');
     Route::get('forgot-password', ForgotPassword::class)->name('password.request');
     Route::get('reset-password/{token}', ResetPassword::class)->name('password.reset');
