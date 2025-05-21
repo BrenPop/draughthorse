@@ -16,10 +16,10 @@ class ProvincesSeeder extends Seeder
         $countryId = DB::table('countries')->where('cca2', 'ZA')->first()->id;
 
         $provinces = [
+            ['name' => 'KwaZulu-Natal', 'code' => 'KZN', 'country_id' => $countryId, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Eastern Cape', 'code' => 'EC', 'country_id' => $countryId, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Free State', 'code' => 'FS', 'country_id' => $countryId, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Gauteng', 'code' => 'GP', 'country_id' => $countryId, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'KwaZulu-Natal', 'code' => 'KZN', 'country_id' => $countryId, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Limpopo', 'code' => 'LP', 'country_id' => $countryId, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Mpumalanga', 'code' => 'MP', 'country_id' => $countryId, 'createdd_at' => now(), 'updated_at' => now()],
             ['name' => 'North West', 'code' => 'NW', 'country_id' => $countryId, 'create_at' => now(), 'updated_at' => now()],

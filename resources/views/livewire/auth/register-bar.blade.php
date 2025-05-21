@@ -97,7 +97,7 @@
                     :placeholder="__('Address line three')"
                 />
 
-                <flux:select wire:model="province" :label="__('Province')">
+                <flux:select wire:model.lazy="selectedProvince" :label="__('Province')">
                     <option value="" selected disabled>{{ __('Select province') }}</option>
                     @foreach ($provinces as $province)
                         <option value="{{ $province->id }}">{{ $province->name }}</option>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('iso2');
+            $table->string('iso2')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('province_id')->references('id')->on('provinces')->onDelete('cascade');
             $table->timestamps();

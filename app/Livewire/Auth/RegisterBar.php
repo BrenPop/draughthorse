@@ -48,22 +48,28 @@ class RegisterBar extends Component
 
     public $bar_type = '';
 
+    public $bar_types = [];
+
+    public $selectedProvince = null;
+
     public $provinces = [];
 
     public $cities = [];
 
-    public function render()
+    public function mount()
     {
-        $barTypes = BarType::all();
-        $provinces = Country::where('cca2', 'ZA')
+        $this->bar_types = BarType::all();
+        $this->provinces = Country::where('cca2', 'ZA')
             ->first()
             ->provinces()
             ->get();
+    }
 
+    public function render()
+    {
         return view('livewire.auth.register-bar', [
-            'barTypes' => $barTypes,
-            'provinces' => $provinces,
-            'cities' => $this->cities,
+            'barTypes' => $this->bar_types,
+            'provinces' => $this->provinces,
         ]);
     }
 
@@ -86,6 +92,7 @@ class RegisterBar extends Component
 
     public function updatedSelectedProvince($value)
     {
-        $this->cities = City::where('province_id', $value)->get();
+        logger('Province changed to: ' . $value); // Check your logs
+        $this->cities = City::where('province_id', $value)->orderBy('name')->get();
     }
 }
