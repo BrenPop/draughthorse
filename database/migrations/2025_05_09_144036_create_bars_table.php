@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string('address_line_one');
             $table->string('address_line_two');
             $table->string('address_line_three');
-            $table->string('city');
-            $table->string('province');
-            $table->string('country');
             $table->string('postal_code');
+            $table->foreignId('city_id')->constrained();
+            $table->foreignId('province_id')->constrained();
+            $table->foreignId('country_id')->constrained();
             $table->foreignId('bar_type_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });
