@@ -4,7 +4,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
 
-    <form wire:submit="registerBar" class="flex flex-col gap-6">
+    <form wire:submit="register" class="flex flex-col gap-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Bar Owner Column -->
             <div class="flex flex-col gap-6">
@@ -63,7 +63,7 @@
                     :placeholder="__('Bar name')"
                 />
 
-                <flux:select wire:model="bar_type" :label="__('Bar Type')">
+                <flux:select wire:model="bar_type_id" :label="__('Bar Type')" id="bar_type_id">
                     <option value="" selected disabled>{{ __('Select Bar Type') }}</option>
                     @foreach ($barTypes as $barType)
                         <option value="{{ $barType->id }}">{{ $barType->name }}</option>
@@ -97,14 +97,23 @@
                     :placeholder="__('Address line three')"
                 />
 
-                <flux:select wire:model="province" :label="__('Province')">
+                <flux:input
+                    wire:model="postal_code"
+                    :label="__('Postal Code')"
+                    type="text"
+                    autofocus
+                    autocomplete="postal_code"
+                    :placeholder="__('Postal code')"
+                />
+
+                <flux:select wire:model.lazy="selectedProvince" :label="__('Province')" id="province_id">
                     <option value="" selected disabled>{{ __('Select province') }}</option>
                     @foreach ($provinces as $province)
                         <option value="{{ $province->id }}">{{ $province->name }}</option>
                     @endforeach
                 </flux:select>
 
-                <flux:select wire:model="city" :label="__('City')">
+                <flux:select wire:model="city_id" :label="__('City')" id="city_id">
                     <option value="" selected disabled>{{ __('Select city') }}</option>
                     @foreach ($cities as $city)
                         <option value="{{ $city->id }}">{{ $city->name }}</option>

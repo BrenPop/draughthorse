@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -34,6 +35,8 @@ class RegisterUser extends Component
     public function register(): void
     {
         try {
+            DB::beginTransaction();
+
             $validated = $this->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -44,6 +47,7 @@ class RegisterUser extends Component
             $userData['password'] = Hash::make($userData['password']);
 
             // if userTypeId does not exist in the UserTypes table redirect to register page
+            // running query to throw fail if not exists
             $userType = UserType::findOrFail($this->userTypeId);
             
             $userData['user_type_id'] = $this->userTypeId;
@@ -51,6 +55,8 @@ class RegisterUser extends Component
             event(new Registered(($user = User::create($userData))));
 
             Auth::login($user);
+
+            DB::commit();
 
             $this->redirect(route('dashboard', absolute: false), navigate: true);
         } catch (\Exception $e) {
