@@ -6,7 +6,7 @@
 
     {{-- Create two buttons to RegisterUser and RegisterBar --}}
     <div class="flex flex-col gap-4">
-        <flux:button wire:click="registerUser" variant="primary" class="w-full">
+        <flux:button wire:click="registerPatron" variant="primary" class="w-full">
             {{ __('Register as a Patron') }}
         </flux:button>
         <flux:button wire:click="registerBar" variant="primary" class="w-full">
