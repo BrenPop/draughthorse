@@ -16,6 +16,11 @@ class Register extends Component
         return redirect()->route('register.user', ['userTypeId' => $patronUserType->id]);
     }
 
+    public function registerPatron()
+    {   
+        return redirect()->route('register.patron');
+    }
+
     public function registerBar()
     {
         return redirect()->route('register.bar');
